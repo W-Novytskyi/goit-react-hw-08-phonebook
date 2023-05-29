@@ -1,7 +1,7 @@
 import { lazy, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
-import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks/useAuth';
 import { RestrictedRoute } from './RestrictedRoute';
@@ -21,39 +21,36 @@ const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    !isRefreshing && (
-      <Routes>
-        <Route path="/" elment={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                component={<RegisterPage />}
-                redirectTo="/contacts"
-              />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute
-                component={<LoginPage />}
-                redirectTo="/contacts"
-              />
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivatedRoute component={<ContactsPage />} redirectTo="/login" />
-            }
-          />
-          <Route path="*" element={<NotFound />} />;
-        </Route>
-      </Routes>
-    )
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" elment={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              component={<RegisterPage />}
+              redirectTo="/contacts"
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivatedRoute component={<ContactsPage />} redirectTo="/login" />
+          }
+        />
+        <Route path="*" element={<NotFound />} />;
+      </Route>
+    </Routes>
   );
 };
 

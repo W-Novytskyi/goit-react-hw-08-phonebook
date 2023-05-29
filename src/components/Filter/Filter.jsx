@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setStatusFilter } from 'redux/filtersSlice';
-import { getStatusFilter } from 'redux/selectors';
+import { setStatusFilter } from 'redux/contacts/filtersSlice';
+import { getStatusFilter } from 'redux/contacts/selectors';
 import { Container, Label, Input } from './Filter.styled';
 
 export default function Filter() {

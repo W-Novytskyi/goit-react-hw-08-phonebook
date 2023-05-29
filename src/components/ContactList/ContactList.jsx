@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
-import { getContacts, getStatusFilter } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/operations';
+import { getContacts, getStatusFilter } from 'redux/contacts/selectors';
 import { Container, Button } from './ContactList.styled';
 
 export default function ContactList() {

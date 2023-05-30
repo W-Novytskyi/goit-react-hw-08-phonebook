@@ -2,16 +2,13 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
 import { getContacts } from 'redux/contacts/selectors';
-import {
-  ContainerForm,
-  Container,
-  Label,
-  Input,
-  Button,
-} from './ContactForm.styled';
+import { getIsLoading } from 'redux/contacts/selectors';
+import { ContainerForm, Container, Label, Input } from './ContactForm.styled';
+import { Button } from '@chakra-ui/react';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
   const contactItems = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -87,9 +84,33 @@ export default function ContactForm() {
           />
         </Label>
       </Container>
-      <Button type="button" onClick={handleAddContact}>
-        Add contact
-      </Button>
+
+      {!isLoading ? (
+        <Button
+          ml="6"
+          size="sm"
+          variant="outline"
+          height="35px"
+          width="120px"
+          colorScheme="blue"
+          onClick={handleAddContact}
+        >
+          Add contact
+        </Button>
+      ) : (
+        <Button
+          ml="6"
+          size="sm"
+          height="35px"
+          width="120px"
+          isLoading
+          loadingText="Submitting"
+          colorScheme="teal"
+          variant="outline"
+        >
+          Submit
+        </Button>
+      )}
     </ContainerForm>
   );
 }

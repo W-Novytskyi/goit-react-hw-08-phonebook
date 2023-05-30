@@ -1,7 +1,8 @@
 import { useAuth } from 'hooks/useAuth';
 import { logOut } from 'redux/auth/operations';
 import { useDispatch } from 'react-redux';
-import { Wrapper, Username, Button } from './UserMenu.styled';
+import { Wrapper, Username } from './UserMenu.styled';
+import { Button } from '@chakra-ui/react';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,18 @@ export const UserMenu = () => {
       <Username>
         Welcome, {user.name} __ {user.email}
       </Username>
-      <Button type="button" onClick={handleLogOut}>
+      {/* <Button type="button" onClick={handleLogOut}>
+        Logout
+      </Button> */}
+      <Button
+        ml="6"
+        size="sm"
+        variant="outline"
+        height="35px"
+        width="120px"
+        colorScheme="blue"
+        onClick={handleLogOut}
+      >
         Logout
       </Button>
     </Wrapper>

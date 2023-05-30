@@ -5,14 +5,14 @@ import { Wrapper, Username, Button } from './UserMenu.styled';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const { user } = useAuth;
+  const { user } = useAuth();
 
   const handleLogOut = () => dispatch(logOut());
 
   return (
     <Wrapper>
       <Username>
-        Welcome, {user.name} / {user.email}
+        Welcome, {user.name} __ {user.email}
       </Username>
       <Button type="button" onClick={handleLogOut}>
         Logout

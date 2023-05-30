@@ -11,7 +11,9 @@ export const UserMenu = () => {
 
   return (
     <Wrapper>
-      <Username>Welcome, {user.name}</Username>
+      <Username>
+        Welcome, {user.name} / {user.email}
+      </Username>
       <Button type="button" onClick={handleLogOut}>
         Logout
       </Button>

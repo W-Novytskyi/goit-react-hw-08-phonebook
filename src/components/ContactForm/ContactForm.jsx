@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
-import { getContacts } from 'redux/contacts/selectors';
-import { getIsLoading } from 'redux/contacts/selectors';
+import { getContacts, getOperation } from 'redux/contacts/selectors';
 import { ContainerForm, Container, Label, Input } from './ContactForm.styled';
+import { ScaleLoader } from 'react-spinners';
 import { Button } from '@chakra-ui/react';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
+  const operation = useSelector(getOperation);
   const contactItems = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -84,33 +84,29 @@ export default function ContactForm() {
           />
         </Label>
       </Container>
-
-      {!isLoading ? (
-        <Button
-          ml="6"
-          size="sm"
-          variant="outline"
-          height="35px"
-          width="120px"
-          colorScheme="blue"
-          onClick={handleAddContact}
-        >
-          Add contact
-        </Button>
-      ) : (
-        <Button
-          ml="6"
-          size="sm"
-          height="35px"
-          width="120px"
-          isLoading
-          loadingText="Submitting"
-          colorScheme="teal"
-          variant="outline"
-        >
-          Submit
-        </Button>
-      )}
+      {/* <button onClick={handleAddContact}>
+        {operation === 'add' ? (
+          <ScaleLoader color="#000000" height={25} />
+        ) : (
+          <>Add contact</>
+        )}
+      </button> */}
+      {/* {!isLoading ? ( */}
+      <Button
+        ml="6"
+        size="sm"
+        variant="outline"
+        height="35px"
+        width="120px"
+        colorScheme="blue"
+        onClick={handleAddContact}
+      >
+        {operation === 'add' ? (
+          <ScaleLoader color="#2b6cb0" height={15} />
+        ) : (
+          <>Add contact</>
+        )}
+      </Button>
     </ContainerForm>
   );
 }

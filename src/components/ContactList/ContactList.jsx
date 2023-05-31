@@ -4,16 +4,18 @@ import { deleteContact } from 'redux/contacts/operations';
 import {
   getContacts,
   getStatusFilter,
-  getIsLoading,
+  getOperation,
 } from 'redux/contacts/selectors';
 import { Container } from './ContactList.styled';
+import { AiFillDelete } from 'react-icons/ai';
+import { GridLoader } from 'react-spinners';
 import { Box, Text, Button } from '@chakra-ui/react';
 
 export default function ContactList() {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const filter = useSelector(getStatusFilter);
-  const isLoading = useSelector(getIsLoading);
+  const operation = useSelector(getOperation);
 
   const handleDeleteContact = contactId => {
     dispatch(deleteContact(contactId));
@@ -32,32 +34,22 @@ export default function ContactList() {
           <Box>
             {`${name}: ${number}`}
             {/* <Button onClick={() => handleDeleteContact(id)}>Delete</Button> */}
-            {!isLoading ? (
-              <Button
-                ml="6"
-                size="sm"
-                variant="outline"
-                height="35px"
-                width="120px"
-                colorScheme="blue"
-                onClick={() => handleDeleteContact(id)}
-              >
-                Delete
-              </Button>
-            ) : (
-              <Button
-                ml="6"
-                size="sm"
-                height="35px"
-                width="120px"
-                isLoading
-                loadingText="Submitting"
-                colorScheme="teal"
-                variant="outline"
-              >
-                Submit
-              </Button>
-            )}
+
+            <Button
+              ml="6"
+              size="sm"
+              variant="outline"
+              height="35px"
+              width="120px"
+              colorScheme="blue"
+              onClick={() => handleDeleteContact(id)}
+            >
+              {operation === id ? (
+                <GridLoader size={2} color="#2b6cb0" />
+              ) : (
+                <AiFillDelete size={25} color="#2b6cb0" />
+              )}
+            </Button>
           </Box>
         </Text>
       ))}

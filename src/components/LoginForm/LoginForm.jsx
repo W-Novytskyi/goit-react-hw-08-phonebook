@@ -1,10 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
+import { getIsLoading } from 'redux/contacts/selectors';
 import { Form, Label, Input } from './LoginForm.styled';
 import { Button } from '@chakra-ui/react';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -15,7 +17,9 @@ export const LoginForm = () => {
         password: form.elements.password.value,
       })
     );
-    form.reset();
+    if (isLoading) {
+      form.reset();
+    }
   };
 
   return (

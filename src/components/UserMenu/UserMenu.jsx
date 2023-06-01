@@ -13,7 +13,7 @@ export const UserMenu = () => {
   return (
     <Wrapper>
       <Username>
-        Welcome, {user.name} __ {user.email}
+        {user.name} __ {user.email}
       </Username>
       {/* <Button type="button" onClick={handleLogOut}>
         Logout

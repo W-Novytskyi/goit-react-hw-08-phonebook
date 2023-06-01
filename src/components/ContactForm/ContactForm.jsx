@@ -41,8 +41,10 @@ export default function ContactForm() {
       } else {
         try {
           await dispatch(addContact({ name, number })).unwrap();
+          alert(`${name} is added to the contact list`);
           reset();
         } catch (error) {
+          alert(`Sorry. Error adding contact to list`);
           console.log('Error adding contact:', error);
         }
       }

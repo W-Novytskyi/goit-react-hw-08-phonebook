@@ -19,6 +19,7 @@ export const register = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (e) {
+      alert('Sorry, data entered with error!');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -32,6 +33,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (e) {
+      alert('Sorry, data entered with error!');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
